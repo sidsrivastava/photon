@@ -1,0 +1,30 @@
+<form id="edit-images" method="post">
+
+  <span tal:repeat="image images" >
+
+
+<h2 tal:content="php:basename(image.path)">Filename</h2>
+  <img tal:attributes="src image/thumbnail/url" alt="thumbnail" style="float: left;" />
+
+
+  <table>
+  <tr>     <td>path</td><td><input tal:attributes="value image/path" type="text" name="path[]" /></td></tr>
+    <tr><td>caption</td><td><input tal:attributes="value image/caption" type="text" name="caption[]" /> <a tal:condition="repeat/image/start" href="javascript:homogenize('caption[]')">homogenize</a></td></tr>
+    <tr><td>date_taken</td><td><input tal:attributes="value image/date_taken" type="text" name="date_taken[]" /> <a tal:condition="repeat/image/start" href="javascript:homogenize('date_taken[]')">homogenize</a></td></tr>
+    <tr><td>place</td><td><input tal:attributes="value image/place" type="text" name="place[]" /> <a tal:condition="repeat/image/start" href="javascript:homogenize('place[]')">homogenize</a></td></tr>
+
+    <tr><td>persons</td><td><input tal:attributes="value php:image.get_person_names()" type="text" name="persons[]" /> <a tal:condition="repeat/image/start" href="javascript:homogenize('persons[]')">homogenize</a></td></tr>
+
+    <tr><td>tags</td><td><input tal:attributes="value php:image.get_tag_names()" type="text" name="tags[]" /> <a tal:condition="repeat/image/start" href="javascript:homogenize('tags[]')">homogenize</a></td></tr>
+    <tr><td>occasion</td><td><input tal:attributes="value image/occasion/name" type="text" name="occasion[]" /> <a tal:condition="repeat/image/start" href="javascript:homogenize('occasion[]')">homogenize</a></td></tr>
+    <tr><td>collection</td><td><input tal:attributes="value image/collection/name" type="text" name="collection[]" /> <a tal:condition="repeat/image/start" href="javascript:homogenize('collection[]')">homogenize</a></td></tr>
+  </table>
+  </span>
+
+
+<p><input type="submit" name="submit" value="submit" /></p>
+<input type="hidden" name="updatedb" value="images" />
+</form>
+
+
+

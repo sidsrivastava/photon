@@ -1,0 +1,54 @@
+
+
+<html metal:use-macro="${page}/page">
+
+  <title metal:fill-slot="title" tal:content="tag/name" />
+
+  <div id="main" metal:fill-slot="content">
+
+
+
+      <h2 tal:content="tag/name" class="center"></h2>
+      <div id="nearby">
+        <span id="previous">
+          <img tal:attributes="src left" alt="Left arrow"
+          class="nearby-arrows" />
+          <a tal:attributes="href previous_tag/output_url"
+          tal:condition="previous_tag"
+          tal:content="previous_tag/name" />
+        </span>
+        <span id="up">
+          <img tal:attributes="src up" alt="Up arrow"
+          class="nearby-arrows" />
+          <a tal:attributes="href tags_index">Tags</a>
+        </span>
+        <span id="next">
+          <img tal:attributes="src right" alt="Right arrow"
+          class="nearby-arrows" />
+          <a tal:attributes="href next_tag/output_url"
+          tal:condition="next_tag" tal:content="next_tag/name" />
+        </span>
+      </div>
+      <div id="images">
+        <tal:block repeat="image images">
+          <a tal:attributes="href image/output_url">
+            <img tal:attributes="src image/thumbnail/url; alt image/caption" />
+          </a>
+        </tal:block>
+      </div>
+
+      <div class="spacer">&#160;</div>
+   </div>
+
+</html>
+
+
+ 
+ 
+
+
+
+
+
+
+

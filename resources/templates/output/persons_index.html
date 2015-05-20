@@ -1,0 +1,43 @@
+
+
+<html metal:use-macro="${page}/page">
+
+  <title metal:fill-slot="title">People</title>
+
+  <div id="main" metal:fill-slot="content">
+
+
+
+      <h2 class="center">People</h2>
+      <div id="nearby">
+        <span id="previous"></span>
+        <span id="up">
+          <img tal:attributes="src up" alt="Up arrow"
+          class="nearby-arrows" />
+          <a tal:attributes="href album_index">Gallery</a>
+        </span>
+        <span id="next"></span>
+      </div>
+      <ul>
+        <li tal:repeat="person persons">
+          <a tal:attributes="href person/output_url"
+          tal:content="person/name" />
+        </li>
+      </ul>
+
+      <div class="spacer">&#160;</div>
+   </div>
+
+</html>
+
+
+ 
+ 
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+<html metal:use-macro="${page}/page" tal:define="global title string:album">
+
+  <title metal:fill-slot="title">Gallery</title>
+
+
+  <div id="main" metal:fill-slot="content">
+      <div class="right">
+      <strong>View by</strong>
+      <a tal:attributes="href tags_index">Tags</a> |
+      <a tal:attributes="href persons_index">People</a></div>
+      <h2 class="center">Gallery</h2>
+      <div class="container">
+        <div class="collection-box" 
+        tal:repeat="collection collections" 
+ tal:attributes="style php: 'background-color:' . background_colors[repeat.collection.index % count(background_colors)] ">
+          <h3 class="center">
+            <a tal:attributes="href collection/output_url"
+            tal:content="collection/name"></a>
+          </h3>
+          <a tal:attributes="href collection/output_url">
+            <img tal:define="image php:get_random_image_by_collection(collection.name)"
+            tal:attributes="src image/thumbnail/url; alt image/caption" />
+          </a>
+          <p>
+            <tal:block repeat="occasion php:get_occasions_by_collection(collection.name)">
+
+              <a tal:define="number php:count(get_images_by_occassion(occasion.name))"
+              tal:attributes="href occasion/output_url"
+              tal:content="php: occasion.name . ' (' . number . ')'" />
+              <br />
+            </tal:block>
+          </p>
+        </div>
+      </div>
+
+      <div class="spacer">&#160;</div>
+
+   </div>
+
+</html>

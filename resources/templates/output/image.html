@@ -1,0 +1,89 @@
+
+<html metal:use-macro="${page}/page">
+
+  <title metal:fill-slot="title" tal:content="image/caption" />
+
+
+  <div id="main" metal:fill-slot="content">
+
+
+     
+
+      <h2 tal:content="image/caption" class="center"></h2>
+      <div id="nearby">
+        <span id="previous">
+          <img tal:attributes="src left" alt="Left arrow"
+          class="nearby-arrows" />
+          <a tal:attributes="href previous_image/output_url"
+          tal:condition="previous_image"
+          tal:content="previous_image/caption" />
+        </span>
+        <span id="up">
+          <img tal:attributes="src up" alt="Up arrow"
+          class="nearby-arrows" />
+          <a tal:attributes="href image/occasion/output_url"
+          tal:condition="image/occasion"
+          tal:content="image/occasion/name" />
+        </span>
+        <span id="next">
+          <img tal:attributes="src right" alt="Right arrow"
+          class="nearby-arrows" />
+          <a tal:attributes="href next_image/output_url"
+          tal:condition="next_image"
+          tal:content="next_image/caption" />
+        </span>
+      </div>
+      <div id="images">
+        <div id="inner-text">
+          <tal:block condition="image/date_taken">
+            <span tal:content="php: get_print_friendly_date(image.date_taken)">
+            </span>
+            <br />
+          </tal:block>
+          <tal:block condition="image/place">
+            <span tal:content="image/place"></span>
+            <br />
+          </tal:block>
+        </div>
+        <p>
+          <a tal:condition="next_image" tal:attributes="href next_image/output_url">
+            <img tal:attributes="src image/snapshot/url; alt image/caption" />
+          </a>
+           <img tal:condition="not: next_image" tal:attributes="src image/snapshot/url; alt image/caption" />
+        </p>
+        <div id="tags"
+        tal:condition="php:count(image.tags) > 0">
+          <tal:block repeat="tag image/tags">
+            <a tal:attributes="href tag/output_url"
+            tal:content="tag/name"></a>
+          </tal:block>
+        </div>
+        <div id="persons"
+        tal:condition="php:count(image.persons) > 0">
+          <tal:block repeat="person image/persons">
+            <a tal:condition="php: !in_array(person.name, unlinked_persons) && person.name != unknown_person"
+            tal:attributes="href person/output_url"
+            tal:content="person/name"></a>
+            <span tal:omit-tag=""
+            tal:condition="php: in_array(person.name, unlinked_persons)"
+            tal:content="person/name" />
+            <span tal:omit-tag=""
+            tal:condition="php: person.name == unknown_person"
+            tal:content="person/name" />
+          </tal:block>
+        </div>
+      </div>
+
+
+      <div class="spacer">&#160;</div>
+   </div>
+
+</html>
+
+
+ 
+ 
+
+
+
+

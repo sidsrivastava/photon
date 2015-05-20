@@ -1,0 +1,15 @@
+<form name="photon" method="post" >
+
+
+  <table tal:condition="contents">
+  <tr tal:repeat="item contents"> 
+    <td><input type="checkbox" name="path[]" tal:attributes="value item/url" /></td>
+    <td><img tal:attributes="src item/icon" alt="file icon" /></td>
+    <td><a tal:attributes="href item/request_url" tal:content="item/name"></a></td>
+  </tr>
+</table>
+
+<p><a href="javascript:check_all()">[check all]</a>&nbsp;<a href="javascript:uncheck_all()">[uncheck all]</a></p>
+
+<p><input type="submit" name="submit" value="submit" /></p>
+</form>
